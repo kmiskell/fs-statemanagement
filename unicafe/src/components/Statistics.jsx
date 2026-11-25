@@ -12,8 +12,8 @@ const Statistics = () => {
           <tr><td>neutral</td><td>{neutral}</td></tr>
           <tr><td>bad</td><td>{bad}</td></tr>
           <tr><td>all</td><td>{all}</td></tr>
-          <tr><td>average</td><td>{(good - bad) / all}</td></tr>
-          <tr><td>positive</td><td>{good / all * 100}%</td></tr>
+          <tr><td>average</td><td>{all ? ((good - bad) / all) : 0}</td></tr>
+          <tr><td>positive</td><td>{all ? (good / all * 100) : 0} %</td></tr>
         </tbody>
       </table>
     </div>
