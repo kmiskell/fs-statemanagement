@@ -29,11 +29,16 @@ const useAnecdoteStore = create((set) => ({
       })})
     ),
     vote: id => set(
-      state => ({
-        anecdotes: state.anecdotes.map(anecdote =>
+      state => {
+        // add the vote
+        const updatedAnecdotes = state.anecdotes.map(anecdote =>
           anecdote.id === id ? { ...anecdote, votes: anecdote.votes + 1 } : anecdote
         )
-      })
+        // sort everything
+        const sortedAnecdotes = updatedAnecdotes.toSorted((a, b) => b.votes - a.votes)
+        // set the new state
+        return { anecdotes: sortedAnecdotes }
+      }
     )
   },
 }))
