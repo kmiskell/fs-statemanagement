@@ -1,10 +1,7 @@
+import { useFeedbackValues } from '../store'
+
 const Statistics = () => {
-  const good = 0
-  const neutral = 0
-  const bad = 0
-  const all = 0
-  const average = 0
-  const positive = 0
+  const { good, neutral, bad, all } = useFeedbackValues()
   
   return (
     <div>
@@ -15,8 +12,8 @@ const Statistics = () => {
           <tr><td>neutral</td><td>{neutral}</td></tr>
           <tr><td>bad</td><td>{bad}</td></tr>
           <tr><td>all</td><td>{all}</td></tr>
-          <tr><td>average</td><td>{average}</td></tr>
-          <tr><td>positive</td><td>{positive}</td></tr>
+          <tr><td>average</td><td>{(good - bad) / all}</td></tr>
+          <tr><td>positive</td><td>{good / all * 100}%</td></tr>
         </tbody>
       </table>
     </div>
