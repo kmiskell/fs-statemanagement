@@ -2,7 +2,7 @@
 import { create } from 'zustand'
 import anecdoteService from './services/anecdotes'
 
-const useAnecdoteStore = create((set) => ({
+const useAnecdoteStore = create((set, get) => ({
   anecdotes: [],
   filter: '',
   actions: {
@@ -10,18 +10,22 @@ const useAnecdoteStore = create((set) => ({
       const newAnecdote = await anecdoteService.createNew(content)
       set(state => ({ anecdotes: state.anecdotes.concat(newAnecdote) }))
     },
-    vote: id => set(
-      state => {
-        // add the vote
-        const updatedAnecdotes = state.anecdotes.map(anecdote =>
-          anecdote.id === id ? { ...anecdote, votes: anecdote.votes + 1 } : anecdote
-        )
-        // sort everything
-        const sortedAnecdotes = updatedAnecdotes.toSorted((a, b) => b.votes - a.votes)
-        // set the new state
-        return { anecdotes: sortedAnecdotes }
-      }
-    ),
+    vote: async (id) => {
+      const anecdote = get().anecdotes.find(a => a.id === id)
+      const updated = await anecdoteService.update(
+        id, { ...anecdote, votes: anecdote.votes + 1 }
+      )
+      set(
+        state => {
+          // add the vote
+          const updatedAnecdotes = state.anecdotes.map(a => a.id === id ? updated : a)
+          // sort everything
+          const sortedAnecdotes = updatedAnecdotes.toSorted((a, b) => b.votes - a.votes)
+          // set the new state
+          return { anecdotes: sortedAnecdotes }
+        }
+      )
+    },
     setFilter: value => set(() => {
       console.log('setting filter to: ', value)
       return { filter: value }
