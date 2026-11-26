@@ -20,6 +20,7 @@ const asObject = anecdote => ({
 
 const useAnecdoteStore = create((set) => ({
   anecdotes: anecdotesAtStart.map(asObject),
+  filter: '',
   actions: {
     add: content => set(
       state => ({ anecdotes: state.anecdotes.concat({
@@ -39,7 +40,11 @@ const useAnecdoteStore = create((set) => ({
         // set the new state
         return { anecdotes: sortedAnecdotes }
       }
-    )
+    ),
+    setFilter: value => set(() => {
+      console.log('setting filter to: ', value)
+      return { filter: value }
+    })
   },
 }))
 
