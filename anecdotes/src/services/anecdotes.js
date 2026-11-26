@@ -13,7 +13,7 @@ const getAll = async () => {
 const createNew = async (content) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       content: content,
       votes: 0
