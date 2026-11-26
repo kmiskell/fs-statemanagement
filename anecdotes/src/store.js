@@ -16,14 +16,7 @@ const useAnecdoteStore = create((set, get) => ({
         id, { ...anecdote, votes: anecdote.votes + 1 }
       )
       set(
-        state => {
-          // add the vote
-          const updatedAnecdotes = state.anecdotes.map(a => a.id === id ? updated : a)
-          // sort everything
-          const sortedAnecdotes = updatedAnecdotes.toSorted((a, b) => b.votes - a.votes)
-          // set the new state
-          return { anecdotes: sortedAnecdotes }
-        }
+        state => ({ anecdotes: state.anecdotes.map(a => a.id === id ? updated : a) })
       )
     },
     setFilter: value => set(() => {
@@ -41,6 +34,6 @@ export const useAnecdotes = () => {
   const anecdotes = useAnecdoteStore((state) => state.anecdotes)
   const filter = useAnecdoteStore((state) => state.filter)
 
- return anecdotes.filter(a => a.content.includes(filter))
+  return anecdotes.filter(a => a.content.includes(filter)).toSorted((a, b) => b.votes - a.votes)
 }
 export const useAnecdoteControls = () => useAnecdoteStore((state) => state.actions)
