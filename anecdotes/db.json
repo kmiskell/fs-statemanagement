@@ -54,11 +54,6 @@
       "content": "Test test test",
       "votes": 1,
       "id": "ZNPwfaLtu4w"
-    },
-    {
-      "content": "Test test test test",
-      "votes": 0,
-      "id": "VtvVrbOOPEU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
