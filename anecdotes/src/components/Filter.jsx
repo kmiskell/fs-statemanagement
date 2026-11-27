@@ -1,7 +1,7 @@
-import { useAnecdoteControls } from '../store'
+import { useAnecdoteActions } from '../store'
 
 const Filter = () => {
-  const { setFilter } = useAnecdoteControls()
+  const { setFilter } = useAnecdoteActions()
 
   const handleChange = (event) => {
     // the value of the input field is in event.target.value

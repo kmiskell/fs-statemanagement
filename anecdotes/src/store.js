@@ -38,7 +38,7 @@ export const useAnecdotes = () => {
 
   return anecdotes.filter(a => a.content.includes(filter)).toSorted((a, b) => b.votes - a.votes)
 }
-export const useAnecdoteControls = () => useAnecdoteStore((state) => state.actions)
+export const useAnecdoteActions = () => useAnecdoteStore((state) => state.actions)
 
 // notification store
 
