@@ -43,7 +43,7 @@ export const useAnecdoteActions = () => useAnecdoteStore((state) => state.action
 // notification store
 
 const useNotificationStore = create((set) => ({
-  message: '',
+  message: null,
   actions: {
     setMessage: message => set(() => {
       console.log('setting message to: ', message)
