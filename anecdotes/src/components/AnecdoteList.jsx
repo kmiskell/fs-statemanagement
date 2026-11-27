@@ -6,8 +6,8 @@ const AnecdoteList = () => {
   const { vote } = useAnecdoteActions()
   const { setMessage } = useNotificationActions()
 
-  const handleVote = (anecdote) => {
-    vote(anecdote.id)
+  const handleVote = async (anecdote) => {
+    await vote(anecdote.id)
     setMessage(`Voted for '${anecdote.content}'`)
     setTimeout(() => {
       setMessage(null)
