@@ -2,6 +2,8 @@
 import { create } from 'zustand'
 import anecdoteService from './services/anecdotes'
 
+// anecdote store
+
 const useAnecdoteStore = create((set, get) => ({
   anecdotes: [],
   filter: '',
@@ -37,3 +39,18 @@ export const useAnecdotes = () => {
   return anecdotes.filter(a => a.content.includes(filter)).toSorted((a, b) => b.votes - a.votes)
 }
 export const useAnecdoteControls = () => useAnecdoteStore((state) => state.actions)
+
+// notification store
+
+const useNotificationStore = create((set) => ({
+  message: '',
+  actions: {
+    setMessage: message => set(() => {
+      console.log('setting message to: ', message)
+      return { message: message }
+    })
+  }
+}))
+
+export const useNotification = () => useNotificationStore((state) => state.message)
+export const useNotificationActions = () => useNotificationStore((state) => state.actions)
